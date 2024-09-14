@@ -19,7 +19,7 @@ const playlist = [
 
 export default function MusicPlayer() {
   const [currentSong, setCurrentSong] = useState(playlist[0])
-  const [isPlaying, setIsPlaying] = useState(true) 
+  const [isPlaying, setIsPlaying] = useState(false) 
   const [playMode, setPlayMode] = useState('repeat')
   const [progress, setProgress] = useState(0)
   const [duration, setDuration] = useState(0)
