@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
@@ -59,7 +59,7 @@ export default function MusicPlayer() {
       audio.removeEventListener('ended', handleSongEnd)
       audio.pause()
     }
-  }, [currentSong])
+  }, [currentSong, isPlaying])
 
   useEffect(() => {
     if (audioRef.current) {
