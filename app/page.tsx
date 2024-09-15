@@ -17,6 +17,50 @@ const playlist = [
   { id: 8, title: "覆灭重生 Come Alive", src: "/audio/覆灭重生 Come Alive.mp3" },
 ]
 
+function ZenlessZoneZeroVinyl() {
+  return (
+    <div className="w-full h-full relative">
+      <svg viewBox="0 0 200 200" className="w-full h-full">
+        <circle cx="100" cy="100" r="100" fill="#fff" />
+        {[...Array(40)].map((_, i) => (
+          <circle
+            key={i}
+            cx="100"
+            cy="100"
+            r={100 - i * 2.5}
+            fill="none"
+            stroke="#ddd"
+            strokeWidth="0.5"
+          />
+        ))}
+        <circle cx="100" cy="100" r="40" fill="#000" />
+        <text
+          x="100"
+          y="95"
+          textAnchor="middle"
+          fill="#fff"
+          fontSize="8"
+          fontFamily="Arial, sans-serif"
+          fontWeight="bold"
+        >
+          Zenless Zone Zero
+        </text>
+        <text
+          x="100"
+          y="110"
+          textAnchor="middle"
+          fill="#fff"
+          fontSize="8"
+          fontFamily="Arial, sans-serif"
+        >
+          三Z Studio
+        </text>
+      </svg>
+      <div className="absolute inset-0 rounded-full shadow-lg pointer-events-none" />
+    </div>
+  )
+}
+
 export default function MusicPlayer() {
   const [currentSong, setCurrentSong] = useState(playlist[0])
   const [isPlaying, setIsPlaying] = useState(false) 
@@ -131,75 +175,82 @@ export default function MusicPlayer() {
   }
 
   return (
-<div className="flex justify-center items-center min-h-screen bg-black text-white">
-      <div className="w-full max-w-3xl bg-zinc-900 rounded-lg shadow-xl overflow-hidden">
-        <div className="flex p-6">
-          <div className="w-1/2 pr-6 flex items-center">
-            <Image
-              src="/images/album-cover.jpeg"
-              alt="Album cover"
-              width={300}
-              height={300}
-              className="w-full h-auto rounded-lg shadow-lg"
-            />
-          </div>
-          <div className="w-1/2 flex flex-col justify-between">
-            <div className="space-y-2">
-              <h2 className="text-xl font-bold text-center">单日常循环</h2>
-              {playlist.map((song) => (
-                <div
-                  key={song.id}
-                  className={`p-2 rounded cursor-pointer ${
-                    currentSong.id === song.id
-                      ? 'bg-zinc-700 text-green-400'
-                      : 'hover:bg-zinc-800'
-                  }`}
-                  onClick={() => setCurrentSong(song)}
-                >
-                  {song.title}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="p-6 bg-zinc-800">
-          <div className="flex justify-between items-center mb-2">
-            <span>{formatTime(progress)}</span>
-            <span>{formatTime(duration)}</span>
-          </div>
-          <Slider
-            value={[progress]}
-            max={duration}
-            step={1}
-            className="w-full mb-4"
-            onValueChange={onProgressChange}
+    <div className="flex justify-center items-center min-h-screen bg-black text-white">
+      <div className="relative w-full max-w-5xl p-6 bg-zinc-700">
+        <div className="absolute left-32 top-16 w-1/4 h-1/2 z-10">
+          <Image
+            src="/images/album-cover-1.jpg"
+            alt="Album cover"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-l-lg"
           />
-          <div className="flex justify-between items-center mt-4">
-          <span className="text-sm">{formatTime(progress)}</span>
-          <span className="text-sm">{formatTime(duration)}</span>
         </div>
-          <div className="flex justify-center items-center space-x-6">
-            <Button variant="ghost" size="icon" onClick={togglePlayMode}>
-            {playMode === 'shuffle' ? <Shuffle /> : <Repeat />}
-            </Button>
-            <Button variant="ghost" size="icon" onClick={playPrevious}>
-              <SkipBack className="w-6 h-6" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={togglePlayPause}
-              className="text-orange-500"
-            >
-              {isPlaying ? (
-                <Pause className="w-10 h-10" />
-              ) : (
-                <Play className="w-10 h-10" />
-              )}
-            </Button>
-            <Button variant="ghost" size="icon" onClick={playNext}>
-              <SkipForward className="w-6 h-6" />
-            </Button>
+        <div className="w-full aspect-video bg-zinc-900 rounded-lg shadow-xl overflow-hidden ml-auto" style={{ width: '80%' }}>
+          <div className="h-full flex flex-col">
+            <div className="flex-grow overflow-hidden">
+              <div className="h-full flex p-4">
+                <div className="w-1/2 pr-4 flex items-center justify-center">
+                  <div className={`w-48 h-48 relative transition-transform duration-1000 ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '4s' }}>
+                    <ZenlessZoneZeroVinyl />
+                  </div>
+                </div>
+                <div className="w-1/2 flex flex-col">
+                  <h2 className="text-lg font-bold text-center mb-2">单日常循环</h2>
+                  <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-800">
+                    {playlist.map((song) => (
+                      <div
+                        key={song.id}
+                        className={`p-2 text-xs rounded cursor-pointer ${
+                          currentSong.id === song.id
+                            ? 'bg-zinc-700 text-green-400'
+                            : 'hover:bg-zinc-800'
+                        }`}
+                        onClick={() => setCurrentSong(song)}
+                      >
+                        {song.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="h-1/5 bg-zinc-800 flex flex-col justify-center p-4 py-8">
+              <div className="flex justify-between items-center mb-1 text-xs">
+                <span>{formatTime(progress)}</span>
+                <span>{formatTime(duration)}</span>
+              </div>
+              <Slider
+                value={[progress]}
+                max={duration}
+                step={1}
+                className="w-full mb-2"
+                onValueChange={onProgressChange}
+              />
+              <div className="flex justify-center items-center space-x-2">
+                <Button variant="ghost" size="sm" onClick={togglePlayMode} className="p-1">
+                  {playMode === 'shuffle' ? <Shuffle className="w-4 h-4" /> : <Repeat className="w-4 h-4" />}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={playPrevious} className="p-1">
+                  <SkipBack className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={togglePlayPause}
+                  className="text-orange-500 p-1"
+                >
+                  {isPlaying ? (
+                    <Pause className="w-6 h-6" />
+                  ) : (
+                    <Play className="w-6 h-6" />
+                  )}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={playNext} className="p-1">
+                  <SkipForward className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
