@@ -15,6 +15,7 @@ const playlist = [
   { id: 6, title: "一颗方糖悬滞的时间", src: "/audio/一颗方糖悬滞的时间.mp3" },
   { id: 7, title: "红透晚烟青", src: "/audio/红透晚烟青.mp3" },
   { id: 8, title: "覆灭重生 Come Alive", src: "/audio/覆灭重生 Come Alive.mp3" },
+  { id: 9, title: "Hyper Commission | Zenless Zone Zero 2024 Mix [Full DJ live set]", src: "/audio/zzz_2024_dj_set.mp3" },
 ]
 
 function ZenlessZoneZeroVinyl() {
