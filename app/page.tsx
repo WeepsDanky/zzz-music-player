@@ -5,18 +5,7 @@ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat } from 'lucide-react'
-
-const playlist = [
-  { id: 1, title: "19%", src: "/audio/19.mp3" },
-  { id: 2, title: "39%", src: "/audio/39.mp3" },
-  { id: 3, title: "79%", src: "/audio/79.mp3" },
-  { id: 4, title: "99%", src: "/audio/99.mp3" },
-  { id: 5, title: "BITE! 咬合力", src: "/audio/BITE! 咬合力.mp3" },
-  { id: 6, title: "一颗方糖悬滞的时间", src: "/audio/一颗方糖悬滞的时间.mp3" },
-  { id: 7, title: "红透晚烟青", src: "/audio/红透晚烟青.mp3" },
-  { id: 8, title: "覆灭重生 Come Alive", src: "/audio/覆灭重生 Come Alive.mp3" },
-  { id: 9, title: "Hyper Commission | Zenless Zone Zero 2024 Mix [Full DJ live set]", src: "/audio/zzz_2024_dj_set.mp3" },
-]
+import playlist from './playlist.json'
 
 function ZenlessZoneZeroVinyl() {
   return (
