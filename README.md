@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+summaryNext.js 绝区零音乐播放器turn0search3
+# 绝区零音乐播放器
 
-## Getting Started
+这是一个使用 Next.js 构建的音乐播放器，旨在复刻《绝区零》游戏中的音乐播放器功能。您可以自行部署此应用，并在浏览器中播放《绝区零》的音乐。
 
-First, run the development server:
+## 功能特性
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 播放《绝区零》游戏原声音乐
+- 支持播放列表管理
+- 响应式设计，适配多种设备
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 部署指南
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+您可以按照以下步骤在本地或服务器上部署此应用：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **克隆仓库**
 
-## Learn More
+   ```bash
+   git clone https://github.com/您的用户名/zzz-music-player.git
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **安装依赖**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   cd zzz-music-player
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **运行开发服务器**
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   在浏览器中打开 `http://localhost:3000` 即可访问。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **构建与启动生产环境**
+
+   ```bash
+   npm run build
+   npm run start
+   ```
+
+   应用将运行在 `http://localhost:3000`。
+
+## 部署到生产环境
+
+您可以将此应用部署到支持 Node.js 的服务器。以下是使用 Nginx 和 PM2 部署的简要步骤：
+
+1. **安装 PM2**
+
+   ```bash
+   npm install pm2 -g
+   ```
+
+2. **启动应用**
+
+   ```bash
+   pm2 start npm --name "zzz-music-player" -- start
+   ```
+
+3. **配置 Nginx**
+
+   在 Nginx 配置文件中添加以下内容：
+
+   ```nginx
+   server {
+       listen 80;
+       server_name your_domain_or_IP;
+
+       location / {
+           proxy_pass http://localhost:3000;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_cache_bypass $http_upgrade;
+       }
+   }
+   ```
+
+   更多详细信息，请参考 [Next.js 官方部署文档](https://nextjs.org/docs/deployment)。
+
+## 贡献
+
+欢迎提交问题和拉取请求。在贡献之前，请确保您已阅读 [贡献指南](CONTRIBUTING.md)。
+
+## 许可证
+
+此项目基于 [MIT 许可证](LICENSE) 开源。
+
+## 致谢
+
+感谢米哈游开发了《绝区零》这款精彩的游戏，并提供了出色的音乐作品。 
